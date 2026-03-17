@@ -1,39 +1,58 @@
 class Solution {
     public String reverseVowels(String s) {
         
-       char[] ar = {'a','e','i','o','u','A','E','I','O','U'};
-        char[] f = s.toCharArray();
-
-        int l = 0;
-        int r = f.length - 1;
-
-        while (l < r) {
-
-            int c1 = 0, c2 = 0;
-
-            for (int i = 0; i < ar.length; i++) {
-                if (f[l] == ar[i]) c1 = 1;
-                if (f[r] == ar[i]) c2 = 1;
-            }
-
-            // move left if not vowel
-            if (c1 == 0) {
-                l++;
-            }
-            // move right if not vowel
-            else if (c2 == 0) {
-                r--;
-            }
-            // both are vowels → swap
-            else {
-                char temp = f[l];
-                f[l] = f[r];
-                f[r] = temp;
-                l++;
-                r--;
-            }
+        char[] ar={'a','e','i','o','u','A','E','I','O','U'};
+        char[] f= new char[s.length()];
+        for(int i=0;i<f.length;i++)
+        {
+            f[i]=s.charAt(i);
         }
+        
+        int l=0;
+        int r=f.length-1;
 
-        return String.valueOf(f);
+        while(l<r)
+        {
+            int c1=0;
+            int c2=0;
+            char s1=f[l];
+            char s3=f[r];
+                for(int i=0;i<ar.length;i++)
+                {
+                    if(s1==ar[i])
+                    {
+                        c1++;
+                    }
+                    if(s3==ar[i])
+                    {
+                        c2++;
+                    }
+                }
+                if(c1==0 && c2==1)
+                {
+                    l++;
+                }
+                else if(c1==1&&c2==0)
+                {
+                    r--;
+                }
+                else if(c1==0 & c2==0)
+                {
+                    l++;
+                    r--;
+
+                }
+                else
+                {
+                    if(c1+c2==2)
+                    {
+                        char swap=f[l];
+                        f[l]=f[r];
+                        f[r]=swap;
+                        l++;
+                        r--;
+                    }
+                }
+        }return String.valueOf(f);
     }
 }
